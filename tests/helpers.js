@@ -18,5 +18,5 @@ export async function login(page, role) {
         { timeout: 10000 }
     );
     
-    console.log(`✅ Логин выполнен как ${role}, URL: ${page.url()}`);
+    console.log(`Логин выполнен как ${role}, URL: ${page.url()}`);
 }
