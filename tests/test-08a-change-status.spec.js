@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { login } from './helpers.js';
 
-test.describe('Тест 7: Смена статуса в рабочем пространстве', () => {
+test.describe('Тест 8a: Смена статуса в рабочем пространстве', () => {
     test('Работодатель меняет статус на "Принят на вакансию"', async ({ page }) => {
         await login(page, 'employer');
         

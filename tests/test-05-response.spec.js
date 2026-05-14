@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
 import { login } from './helpers.js';
 
-test.describe('Тест 5: Цикл создания, отклика и подтверждения вакансии', () => {
-    test('Работодатель создаёт вакансию, студент откликается, работодатель подтверждает', async ({ page }) => {
+test.describe('Тест 5: Цикл создания и отклика', () => {
+    test('Работодатель создаёт вакансию, студент откликается', async ({ page }) => {
         const uniqueTitle = `Тестовая вакансия ${Date.now()}`;
         
         console.log(`Уникальное название: ${uniqueTitle}`);

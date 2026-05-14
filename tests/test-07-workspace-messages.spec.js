@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { login } from './helpers.js';
 
-test.describe('Тест 6: Сообщения в рабочем пространстве', () => {
+test.describe('Тест 7: Сообщения в рабочем пространстве', () => {
     test('Работодатель и студент обмениваются сообщениями', async ({ page }) => {
         await login(page, 'employer');
         await page.goto('https://dev.profteam.su/account/responses');

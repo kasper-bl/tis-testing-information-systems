@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
 import { login } from './helpers.js';
 
-test.describe('Тест 5b: Подтверждение отклика работодателем', () => {
-    test('Работодатель подтверждает отклик на вакансию во вкладке "На рассмотрении"', async ({ page }) => {
+test.describe('Тест 6: Подтверждение отклика работодателем', () => {
+    test('Работодатель подтверждает отклик на вакансию во вкладке', async ({ page }) => {
         await login(page, 'employer');
         
         await page.goto('https://dev.profteam.su/account/responses');

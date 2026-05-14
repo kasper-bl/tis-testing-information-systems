@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { login } from './helpers.js';
 
-test.describe('Тест 8: Негативный - отправка пустого сообщения', () => {
+test.describe('Тест 9: Негативный - отправка пустого сообщения', () => {
     test('negative: cannot send empty message', async ({ page }) => {
         await login(page, 'employer');
         
