@@ -1,18 +1,15 @@
-// tests/test-05-full-respond-flow.spec.js
 import { test, expect } from '@playwright/test';
 import { login } from './helpers.js';
 
-test.describe('Тест 5: Полный цикл создания, отклика и подтверждения вакансии', () => {
+test.describe('Тест 5: Цикл создания, отклика и подтверждения вакансии', () => {
     test('Работодатель создаёт вакансию, студент откликается, работодатель подтверждает', async ({ page }) => {
         const uniqueTitle = `Тестовая вакансия ${Date.now()}`;
         
-        console.log(`📝 Уникальное название: ${uniqueTitle}`);
+        console.log(`Уникальное название: ${uniqueTitle}`);
         
-        // ========== ЧАСТЬ 1: Работодатель создаёт вакансию ==========
         await login(page, 'employer');
         await page.goto('https://dev.profteam.su/account/vacancies');
         
-        // Создаём вакансию
         await page.click('button:has-text("Создать вакансию")');
         await page.waitForSelector('h2:has-text("Создать вакансию")', { timeout: 5000 });
         
@@ -25,14 +22,12 @@ test.describe('Тест 5: Полный цикл создания, отклик�
         
         await page.waitForTimeout(2000);
         
-        // Закрываем форму
         const closeButton = page.locator('img[alt="close"], .modal-close');
         if (await closeButton.isVisible().catch(() => false)) {
             await closeButton.click();
             await page.waitForTimeout(1000);
         }
         
-        // Публикуем вакансию
         const vacancyCard = page.locator(`h2:has-text("${uniqueTitle}")`).locator('..').locator('..');
         const publishButton = vacancyCard.locator('button:has-text("Опубликовать")');
         await publishButton.waitFor({ state: 'visible', timeout: 5000 });
@@ -40,9 +35,8 @@ test.describe('Тест 5: Полный цикл создания, отклик�
         
         await page.waitForTimeout(2000);
         
-        console.log(`✅ Вакансия "${uniqueTitle}" создана и опубликована`);
+        console.log(`Вакансия "${uniqueTitle}" создана и опубликована`);
         
-        // ========== ЧАСТЬ 2: Выход и вход студента ==========
         await page.click('button:has-text("Выйти")');
         await page.waitForTimeout(1000);
         
@@ -52,9 +46,8 @@ test.describe('Тест 5: Полный цикл создания, отклик�
         await page.click('button:has-text("Войти")');
         await page.waitForURL('**/account/main**', { timeout: 10000 });
         
-        console.log('✅ Вход выполнен как Sozpawka');
+        console.log('Вход выполнен как моего студента');
         
-        // ========== ЧАСТЬ 3: Студент откликается ==========
         await page.goto('https://dev.profteam.su/vacancies');
         await page.waitForLoadState('networkidle');
         

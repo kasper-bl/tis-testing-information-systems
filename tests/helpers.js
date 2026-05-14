@@ -11,10 +11,8 @@ export async function login(page, role) {
     await page.fill('input[autocomplete="username"]', user.username);
     await page.fill('input[autocomplete="current-password"]', user.password);
     
-    // Кликаем конкретно по кнопке с текстом "Войти"
     await page.click('button:has-text("Войти")');
     
-    // Ждем ухода со страницы логина
     await page.waitForFunction(
         () => !window.location.href.includes('/login'),
         { timeout: 10000 }
