@@ -2,8 +2,8 @@
 import { test, expect } from '@playwright/test';
 import { login } from './helpers.js';
 
-test.describe('Тест 5: Полный цикл создания и отклика на вакансию', () => {
-    test('Работодатель создаёт вакансию, студент откликается', async ({ page }) => {
+test.describe('Тест 5: Полный цикл создания, отклика и подтверждения вакансии', () => {
+    test('Работодатель создаёт вакансию, студент откликается, работодатель подтверждает', async ({ page }) => {
         const uniqueTitle = `Тестовая вакансия ${Date.now()}`;
         
         console.log(`📝 Уникальное название: ${uniqueTitle}`);
@@ -54,30 +54,26 @@ test.describe('Тест 5: Полный цикл создания и откли�
         
         console.log('✅ Вход выполнен как Sozpawka');
         
-        // ========== ЧАСТЬ 3: Студент ищет и откликается ==========
+        // ========== ЧАСТЬ 3: Студент откликается ==========
         await page.goto('https://dev.profteam.su/vacancies');
         await page.waitForLoadState('networkidle');
         
-        // Поиск вакансии
         const searchInput = page.locator('input[placeholder="Название..."]');
         await searchInput.fill(uniqueTitle);
         await searchInput.press('Enter');
         
         await page.waitForTimeout(2000);
         
-        // Проверяем, что вакансия найдена
         await expect(page.locator(`h2:has-text("${uniqueTitle}")`)).toBeVisible({ timeout: 5000 });
         
-        // Нажимаем "Откликнуться"
         const respondButton = page.locator('button:has-text("Откликнуться")').first();
         await respondButton.click();
         
         await page.waitForTimeout(2000);
         
-        // Проверяем, что кнопка изменилась на "Вы уже откликнулись!" (отклик успешен)
         const successIndicator = page.locator('button:has-text("Вы уже откликнулись")');
         await expect(successIndicator).toBeVisible({ timeout: 5000 });
         
-        console.log(`✅ Студент успешно откликнулся на вакансию "${uniqueTitle}"`);
+        console.log(`Студент откликнулся на вакансию "${uniqueTitle}"`);
     });
 });
